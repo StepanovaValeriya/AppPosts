@@ -1,0 +1,18 @@
+@import url(./_nullStyle.scss);
+// @import url(./_variables.scss);
+// @import url(./_mixins.scss);
+
+body {
+  height: 100%;
+  line-height: 1;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: PT Sans;
+}
+
+._container {
+  max-width: 1200px;
+  padding: 0px 15px;
+  margin: 0px auto;
+  box-sizing: border-box;
+}

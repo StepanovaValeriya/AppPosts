@@ -1,30 +1,30 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <div class="wrapper">
+    <Header></Header>
+    <main class="page">
+      <router-view></router-view>
+    </main>
+    <Footer></Footer>
+  </div>
 </template>
 
+<script>
+import Header from './app/Header.vue';
+import Footer from './app/Footer.vue';
+export default {
+  components: { Header, Footer },
+};
+</script>
+
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+@import 'materialize-css/dist/css/materialize.min.css';
+.wrapper {
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.page {
+  flex: 1 1 auto;
 }
 </style>
