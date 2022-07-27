@@ -20,6 +20,9 @@
 export default {
   name: 'comments',
   props: ['postComments'],
+  data() {
+    return {};
+  },
 };
 </script>
 

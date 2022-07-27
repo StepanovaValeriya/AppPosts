@@ -6,20 +6,21 @@
       <div class="post__author">
         <h2>About author</h2>
         <span>Name: {{ post.name }}</span>
-        <span>Alias: {{ user.username }}</span>
-        <span>E-mail: {{ user.email }}</span>
-        <span>Site: {{ user.website }}</span>
+        <span>Alias: {{ post.username }}</span>
+        <span>E-mail: {{ post.email }}</span>
       </div>
       <div class="post__text">
         <p>{{ post.body }}</p>
       </div>
     </div>
   </section>
-  <Comments :postComments="comments"></Comments>
+  <Comments :postComments="commentForPost"></Comments>
+  <AddComment @created="addNewComment" :postId="postId"></AddComment>
 </template>
 
 <script>
 import Comments from '../components/Comments.vue';
+import AddComment from '../components/AddComment.vue';
 import { mapActions, mapGetters, mapState } from 'vuex';
 export default {
   name: 'singlePost',
@@ -27,22 +28,23 @@ export default {
     return {};
   },
   methods: {
-    ...mapActions(['getComments']),
+    ...mapActions(['getComments', 'getPosts', 'getUsers']),
+    addNewComment(comment) {
+      this.comments.push(comment);
+      console.log(this.comments);
+    },
   },
   mounted() {
     this.getComments();
-    // this.getPosts();
-    // this.getUsers();
+    this.getPosts();
+    this.getUsers();
   },
   computed: {
     post() {
       return this.$store.getters['getPost'](this.postId);
     },
-    user() {
-      return this.$store.getters['getUser'](this.postId);
-    },
     comments() {
-      return this.$store.getters['getCommentsForPost'](this.postId);
+      return this.$store.getters['comments'];
     },
     postId() {
       return parseInt(+this.$route.params.id);
@@ -50,8 +52,11 @@ export default {
     ...mapState({
       isLoading: (state) => state.posts.loading,
     }),
+    commentForPost() {
+      return this.comments.filter((comment) => comment.postId == this.postId);
+    },
   },
-  components: { Comments },
+  components: { Comments, AddComment },
 };
 </script>
 

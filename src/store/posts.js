@@ -24,11 +24,12 @@ export default {
         let user = rootGetters['getUser'](post.userId);
         return _.extend(post, {
           name: user.name,
+          username: user.username,
+          email: user.email,
         });
       } else {
         return null;
       }
-      // fdfjdkf
     },
   },
 

@@ -10,9 +10,9 @@ export default {
   },
   getters: {
     comments: (state) => state.comments,
-    getCommentsForPost: (state) => (id) => {
-      return state.comments.filter((comment) => comment.postId == id) || {};
-    },
+    // getCommentsForPost: (state) => (id) => {
+    //   return state.comments.filter((comment) => comment.postId == id) || {};
+    // },
   },
 
   actions: {
@@ -24,6 +24,19 @@ export default {
         const data = response.data;
         commit('setComments', data);
         console.log(response);
+      } catch (err) {
+        commit('setError', err);
+        console.log(err.response);
+      }
+    },
+    async createComment({ commit }, comment) {
+      try {
+        const response = await axios.post(
+          `https://jsonplaceholder.typicode.com/comments`,
+          comment
+        );
+        const newComment = response.data;
+        return newComment;
       } catch (err) {
         commit('setError', err);
         console.log(err.response);
