@@ -5,7 +5,7 @@
         <li class="post__item" v-for="post in posts" :key="post.id">
           <a @click="$router.push('/post/' + post.id)" class="post__link">
             <h2 class="post__title">{{ post.title }}</h2>
-            <span class="post__author">Author: {{ post.userId }}</span>
+            <span class="post__author">№: {{ post.id }}</span>
             <p class="post__text">{{ post.body }}</p>
           </a>
         </li>

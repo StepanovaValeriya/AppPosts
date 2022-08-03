@@ -16,11 +16,10 @@ export default {
   data() {
     return {
       currentUser: '',
-      nameOfUser: '',
     };
   },
   methods: {
-    ...mapActions(['getPosts', 'getUsers']),
+    ...mapActions(['getPosts', 'getUsers', 'getFilterPosts']),
     changeCurrentUser(value) {
       this.currentUser = value;
     },
@@ -35,6 +34,9 @@ export default {
     },
     users() {
       return this.$store.getters.users;
+    },
+    userPosts() {
+      return this.$store.getters.filterPosts;
     },
     ...mapState({
       isLoading: (state) => state.posts.loading,
